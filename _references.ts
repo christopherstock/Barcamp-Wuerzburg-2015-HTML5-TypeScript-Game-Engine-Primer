@@ -1,6 +1,5 @@
 /// <reference path="src_lib/de/christopherstock/lib/ui/LibDrawing.ts" />
 /// <reference path="src_lib/de/christopherstock/lib/hid/LibKeySystem.ts" />
-/// <reference path="src_lib/de/christopherstock/lib/hid/LibTouchSystem.ts" />
 /// <reference path="src_lib/de/christopherstock/lib/util/LibMath.ts" />
 /// <reference path="src/de/christopherstock/bcw/BcwDebug.ts" />
 /// <reference path="src/de/christopherstock/bcw/Bcw.ts" />

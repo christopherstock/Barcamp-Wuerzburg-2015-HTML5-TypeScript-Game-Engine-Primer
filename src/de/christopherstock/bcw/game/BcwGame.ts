@@ -16,9 +16,6 @@
         /** List of collectable items */
         public      static      items               :Array<BcwItem>             = null;
 
-        /** Flags all items being picked. */
-        public      static      gameOver            :boolean                    = false;
-
         /*****************************************************************************
         *   Inits the game engine.
         *****************************************************************************/
@@ -62,11 +59,8 @@
             //init key system
             LibKeySystem.init();
 
-            //init touch system
-            LibTouchSystem.init();
-
             //start the bg sound
-            BcwSound.playSound( BcwSound.BG_ENCHANTED_WOODS );
+            //BcwSound.playSound( BcwSound.BG_ENCHANTED_WOODS );
 
             //start game loop
             setInterval( BcwGame.tick, BcwSettings.THREAD_DELAY );
@@ -77,8 +71,8 @@
         *****************************************************************************/
         public static tick():void
         {
-            if ( !BcwGame.gameOver ) BcwGame.render();
-            if ( !BcwGame.gameOver ) BcwGame.draw( BcwGame.canvas.getContext() );
+            BcwGame.render();
+            BcwGame.draw( BcwGame.canvas.getContext() );
         }
 
         /*****************************************************************************
@@ -91,10 +85,10 @@
             BcwSprite.PLAYER_WALK_LEFT.nextTick();
             BcwSprite.PLAYER_WALK_RIGHT.nextTick();
 
-            var moveLeft:boolean  = LibKeySystem.isKeyPressed( BcwSettings.KEY_LEFT  ) || LibTouchSystem.activeGestureLeft();
-            var moveRight:boolean = LibKeySystem.isKeyPressed( BcwSettings.KEY_RIGHT ) || LibTouchSystem.activeGestureRight();
-            var moveUp:boolean    = LibKeySystem.isKeyPressed( BcwSettings.KEY_UP    ) || LibTouchSystem.activeGestureUp();
-            var moveDown:boolean  = LibKeySystem.isKeyPressed( BcwSettings.KEY_DOWN  ) || LibTouchSystem.activeGestureDown();
+            var moveLeft:boolean  = LibKeySystem.isKeyPressed( BcwSettings.KEY_LEFT  );
+            var moveRight:boolean = LibKeySystem.isKeyPressed( BcwSettings.KEY_RIGHT );
+            var moveUp:boolean    = LibKeySystem.isKeyPressed( BcwSettings.KEY_UP    );
+            var moveDown:boolean  = LibKeySystem.isKeyPressed( BcwSettings.KEY_DOWN  );
 
             if ( moveRight )
             {
@@ -136,13 +130,6 @@
 
             //render camera
             BcwCamera.update();
-
-            //check if all items have been picked
-            if ( !BcwGame.gameOver && BcwItem.checkAllPicked() )
-            {
-                BcwGame.gameOver = true;
-                alert( "Congratulations on picking up all items! :D" );
-            }
         }
 
         /*****************************************************************************
